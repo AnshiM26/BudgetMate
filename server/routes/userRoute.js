@@ -4,5 +4,5 @@ import { changePass,getUser,updateUser } from '../controllers/userController.js'
 const router=express.Router();
 router.get("/",authMiddleware,getUser);
 router.put("/change-password",authMiddleware,changePass);
-router.put("/:id",authMiddleware,updateUser);
+router.put("/",authMiddleware,updateUser);
 export default router
