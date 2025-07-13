@@ -51,7 +51,7 @@ export const signinuser=async(req,res)=>{
         const user=result.rows[0];
         if(!user){
             return res.status(404).json({
-                status:"failed",
+                status:"failed email",
                 message:"Invalid email or password!"
             })
         }
@@ -59,7 +59,7 @@ export const signinuser=async(req,res)=>{
         const matched=await comparePass(password,user?.password)
         if(!matched){
             return res.status(404).json({
-                status:"failed",
+                status:"failed password",
                 message:"Invalid email and password!"
             })
         }

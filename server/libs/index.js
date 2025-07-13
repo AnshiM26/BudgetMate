@@ -12,7 +12,7 @@ export const comparePass = async (userPass, dbpass) => {
     const match = await bcrypt.compare(userPass, dbpass);
     return match;
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -21,3 +21,8 @@ export const JWT = (id) => {
     expiresIn: "1d",
   });
 };
+
+export function getMonthName(index){
+  const months=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  return months[index];
+}

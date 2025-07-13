@@ -3,7 +3,7 @@ import { pool } from "../libs/db.js";
 import { comparePass } from "../libs/index.js";
 export const getUser = async (req, res) => {
   try {
-    const {userId}=req.body.user;
+    const {userId}=req.user;
     const userExists=await pool.query({
         text:`SELECT * FROM tbluser WHERE id=$1`,
         values:[userId]
@@ -32,7 +32,7 @@ export const getUser = async (req, res) => {
 
 export const changePass=async(req,res)=>{
     try {
-        const {userId}=req.body.user;
+        const {userId}=req.user;
         const {currpass,newpass,confirmpass}=req.body
         const userExist=await pool.query({
             text:`SELECT * FROM tbluser WHERE $1`,
@@ -71,7 +71,7 @@ export const changePass=async(req,res)=>{
 }
 export const updateUser=async(req,res)=>{
     try {
-        const {userId}=req.body.user;
+        const {userId}=req.user;
         const {fname, lname, country, currency, contact}=req.body;
         const userExists=await pool.query({
             text:`SELECT * FROM tbluser WHERE id=$1`,

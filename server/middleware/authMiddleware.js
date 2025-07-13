@@ -11,7 +11,7 @@ const authMiddleware=async(req,res,next)=>{
     const token=header?.split(" ")[1]; //bearer jcjwecwe
     try {
         const userToken=JWT.verify(token,process.env.JWT_SECRET);
-        req.body.user={
+        req.user={
             userId:userToken.userId
         };
         next();
