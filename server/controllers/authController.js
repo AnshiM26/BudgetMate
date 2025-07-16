@@ -80,4 +80,49 @@ export const signinuser=async(req,res)=>{
     }
 }
 
+export const oauthLogin = async (req, res) => {
+  try {
+    const { name, email, uid, provider } = req.body;
+
+    if (!email || !uid || !provider) {
+      return res.status(400).json({
+        status: "failed",
+        message: "Missing required fields",
+      });
+    }
+
+    // Check if user exists
+    const result = await pool.query({
+      text: `SELECT * FROM tbluser WHERE uid = $1`,
+      values: [uid],
+    });
+
+    let user = result.rows[0];
+
+    // If user doesn't exist, create one
+    if (!user) {
+      const insert = await pool.query({
+        text: `INSERT INTO tbluser (firstname, email, uid, provider) VALUES ($1, $2, $3, $4) RETURNING *`,
+        values: [name, email, uid, provider],
+      });
+      user = insert.rows[0];
+    }
+
+    const token = JWT(user.id);
+    user.password = undefined;
+
+    return res.status(200).json({
+      status: "success",
+      message: "Logged in with Google",
+      user,
+      token,
+    });
+  } catch (error) {
+    console.log("OAuth login error:", error.message);
+    return res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
 

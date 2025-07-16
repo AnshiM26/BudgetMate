@@ -7,7 +7,7 @@ import Transactions from "./pages/transactions.jsx";
 import AccountPage from "./pages/account-page.jsx";
 import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import useStore from "./store/index.js";
-
+import { Toaster } from "sonner";
 const RootLayout = () => {
   const {user} = useStore((state)=>state);
   console.log(user);
@@ -16,7 +16,7 @@ const RootLayout = () => {
   ) : (
     <>
       {/*<Navbar/>*/}
-      <div>
+      <div className="min-h-[cal(h-screen-100px)]">
         <Outlet />
       </div>
     </>
@@ -25,7 +25,7 @@ const RootLayout = () => {
 function App() {
   return (
     <main>
-      <div>
+      <div className="w-full min-h-screen px-6 bg-gray-100 md:px-20 dark:bg-slate-900">
         <Routes>
           <Route element={<RootLayout />}>
             <Route path="/" element={<Navigate to="/overview" />} />
@@ -38,6 +38,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
         </Routes>
       </div>
+      <Toaster richColors position="top-center" />
     </main>
   );
 }
