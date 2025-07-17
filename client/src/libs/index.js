@@ -20,3 +20,35 @@ export const formatCurrency=(value)=>{
         minimumFractionDigits:2,
     }).format(numberValue);
 };
+
+export async function fetchCountries() {
+  try {
+    const response = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,currencies");
+    const data = await response.json();
+
+    if (response.ok) {
+      const countries = data.map((country) => {
+        const currencies = country.currencies || {};
+        const currencyCode = Object.keys(currencies)[0];
+
+        return {
+          country: country.name?.common || "",
+          flag: country.flags?.png || "",
+          currency: currencyCode || "",
+        };
+      });
+
+      const sortedCountries = countries.sort((a, b) =>
+        a.country.localeCompare(b.country)
+      );
+
+      return sortedCountries;
+    } else {
+      console.error(`Error: ${data.message}`);
+      return [];
+    }
+  } catch (error) {
+    console.error("An error occurred while fetching data:", error);
+    return [];
+  }
+}
