@@ -17,12 +17,12 @@ const links = [
 ];
 
 const UserMenu = () => {
-  const { user, setCredentails } = useStore((state) => state);
+  const { user, setCredentials } = useStore((state) => state);
   const navigate = useNavigate();
 
-  const handleSingout = () => {
+  const handleSignout = () => {
     localStorage.removeItem("user");
-    setCredentails(null);
+    setCredentials(null);
     navigate("/sign-in");
   };
 
@@ -52,7 +52,7 @@ const UserMenu = () => {
             <Menu.Item>
               {({ active }) => (
                 <button
-                  onClick={handleSingout}
+                  onClick={handleSignout}
                   className={`${
                     active
                       ? "bg-violet-500/10 text-gray-900 dark:text-white"
@@ -103,7 +103,7 @@ const MobileSidebar = () => {
                   ))}
 
                   <div className='flex items-center justify-between py-6 px-4'>
-                    <Popover.Button>
+                    <Popover.Button as="div">
                       <ThemeSwitch />
                     </Popover.Button>
                     <UserMenu />

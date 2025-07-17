@@ -35,7 +35,6 @@ const ICONS = {
 };
 
 const Accounts = ({data}) => {
-    console.log("reached");
   return (
     <div className='mt-20 md:mt-0 py-5 md:py-20 md:w-1/3'>
       <Title title='Accounts' />

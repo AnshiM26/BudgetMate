@@ -221,7 +221,7 @@ export const SettingForm = () => {
           variant="outline"
           loading={loading}
           type="reset"
-          className="px-6 bg-transparent text-black dark:text-white border border-gray-200 dark:border-s-gray-700"
+          className="px-6 bg-transparent text-black dark:text-black border border-gray-200 dark:border-s-gray-700"
         >
           Reset
         </Button>

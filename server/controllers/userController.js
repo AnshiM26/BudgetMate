@@ -35,11 +35,11 @@ export const changePass=async(req,res)=>{
         const {userId}=req.user;
         const {currpass,newpass,confirmpass}=req.body
         const userExist=await pool.query({
-            text:`SELECT * FROM tbluser WHERE $1`,
+            text:`SELECT * FROM tbluser WHERE id=$1`,
             values:[userId],
         });
         const user=userExist.rows[0];
-        if(!userExist){
+        if(userExist.rows.length === 0){
             return res.status(404).json({status:"failed",message:"User not found"})
         }
         if(newpass!==confirmpass){

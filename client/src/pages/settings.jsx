@@ -2,6 +2,7 @@ import React from "react";
 import useStore from "../store/index.js";
 import Title from "../components/title.jsx";
 import { SettingForm } from "../components/settings-form.jsx";
+import ChangePassword from "../components/changePass.jsx"
 const Settings = () => {
   const { user } = useStore((state) => state);
   return (
@@ -21,7 +22,7 @@ const Settings = () => {
             <p className="text-2xl font-semibold text-black dark:text-gray-400">{user?.firstname}</p>
           </div>
           <SettingForm/>
-          
+          {!user?.provided && <ChangePassword />}
         </div>
       </div>
     </div>
