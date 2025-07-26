@@ -52,3 +52,12 @@ export async function fetchCountries() {
     return [];
   }
 }
+
+export function generateAccountNumber(){
+  let accountNumber="";
+  while(accountNumber.length<13){
+    const uuid=uuidv4().replace(/-/g,"");
+    accountNumber+=uuid.replace(/\D/g,"");
+  }
+  return accountNumber.substr(0,13);
+}
