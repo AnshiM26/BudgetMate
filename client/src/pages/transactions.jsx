@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import api from "../libs/apiCalls.js";
 import { toast } from "sonner";
+import AddTransaction from "../components/addTransaction.jsx";
 import ViewTransaction from "../components/viewTransaction.jsx"
 import Loading from "../components/loading.jsx";
 import Title from "../components/title.jsx";
@@ -182,12 +183,12 @@ const Transactions = () => {
           </>
         )}
       </div>
-      {/* <AddTransaction 
+      <AddTransaction 
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         refetch={fetchTransaction}
         key={new Date().getTime()}
-      /> */}
+      />
       <ViewTransaction 
         data={selected}
         isOpen={isOpenView}
